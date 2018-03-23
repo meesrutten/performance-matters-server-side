@@ -1,4 +1,4 @@
-import app from './app'
+import app from './app';
 
 // // Import a module using CommonJS syntax
 // const dep = require('./path/to/dep');

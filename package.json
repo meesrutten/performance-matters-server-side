@@ -41,7 +41,7 @@
 	},
 	"eslintConfig": {
 		"plugins": [
-			"example"
+			"TweenMax"
 		],
 		"env": {
 			"example/custom": true

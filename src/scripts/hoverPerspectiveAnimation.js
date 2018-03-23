@@ -1,5 +1,4 @@
 function hoverPerspectiveAnimation() {
-
 	const button = document.querySelectorAll('[data-type="timeline-info"] .creatorWork'),
 		label = document.querySelectorAll('[data-type="timeline-info"] .creatorWork h2');
 
@@ -28,7 +27,7 @@ function hoverPerspectiveAnimation() {
 			TweenMax.to(el, 0.1, { rotationX: rx * rMax, rotationY: ry * rMax });
 		});
 
-		el.addEventListener('mouseout', function (e) {
+		el.addEventListener('mouseout', function () {
 			if (mouseOutTween) mouseOutTween.kill();
 			mouseOutTween = TweenMax.to(el, 0.25, { delay: 0.25, rotationX: 0, rotationY: 0 });
 		});
