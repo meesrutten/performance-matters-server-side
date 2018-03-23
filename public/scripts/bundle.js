@@ -3,7 +3,11 @@
 
 var _initialAnimation = require('./initialAnimation');
 
-var hoverPerspectiveAnimation = require('./hoverPerspectiveAnimation');
+var _hoverPerspectiveAnimation = require('./hoverPerspectiveAnimation');
+
+var _hoverPerspectiveAnimation2 = _interopRequireDefault(_hoverPerspectiveAnimation);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 if (!localStorage.getItem('visited')) {
 	(0, _initialAnimation.initialAnimation)();
@@ -14,7 +18,7 @@ if (document.querySelectorAll('#black_stripe')[0]) {
 	(0, _initialAnimation.detailPageAnimation)();
 }
 
-hoverPerspectiveAnimation();
+(0, _hoverPerspectiveAnimation2.default)();
 
 // Promise.all([
 // 	module.import('./initialAnimation'),

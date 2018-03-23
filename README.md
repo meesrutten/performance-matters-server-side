@@ -9,6 +9,11 @@ For this build I used:
 - Express request
 - GSAP Libraries
 
+## Functionality
+ Works without JavaScript
+ Server: express
+ Data from Adamnet
+
 ## NPM scripts
 
 ### Run all
@@ -40,3 +45,7 @@ Config is included in the project.
 "lint": "eslint src/scripts/*.js"
 ```	
 
+### Audit
+![A Lighthouse audit](https://github.com/meesrutten/performance-matters-server-side/blob/master/readme-images/audit.png "Audit")
+- Images are very slow because of the endpoint.
+- 89/100 in Performance

@@ -1,5 +1,5 @@
 import {initialAnimation, detailPageAnimation} from './initialAnimation';
-const hoverPerspectiveAnimation = require('./hoverPerspectiveAnimation');
+import hoverPerspectiveAnimation from './hoverPerspectiveAnimation';
 
 if (!localStorage.getItem('visited')) {
 	initialAnimation();
