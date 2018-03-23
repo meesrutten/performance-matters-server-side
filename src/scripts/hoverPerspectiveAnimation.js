@@ -1,7 +1,5 @@
 function hoverPerspectiveAnimation() {
 
-	const TWO_PI = Math.PI * 2;
-
 	const button = document.querySelectorAll('[data-type="timeline-info"] .creatorWork'),
 		label = document.querySelectorAll('[data-type="timeline-info"] .creatorWork h2');
 
@@ -35,7 +33,7 @@ function hoverPerspectiveAnimation() {
 			mouseOutTween = TweenMax.to(el, 0.25, { delay: 0.25, rotationX: 0, rotationY: 0 });
 		});
 
-	})
+	});
 }
 
-export default hoverPerspectiveAnimation
+module.exports = hoverPerspectiveAnimation;

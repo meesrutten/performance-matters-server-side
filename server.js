@@ -1,8 +1,8 @@
-const express = require('express')
-const request = require('request')
-const app = express()
+const express = require('express');
+const request = require('request');
+const app = express();
 
-app.use(express.static('public'))
+app.use(express.static('public'));
 app.set('view engine', 'ejs');
 app.set('views', 'views');
 
@@ -49,9 +49,9 @@ request(makeQueryURL(creatorQuery), function (error, response, data) {
 				[el.creatorName.value]: Array.isArray(acc[el.creatorName.value]) ? [...acc[el.creatorName.value], el] : [el],
 			}), {});
 
-			const resultArray = Object.keys(result).map(key => result[key])
+			const resultArray = Object.keys(result).map(key => result[key]);
 
-			resultArray.forEach((creator, i) => {
+			resultArray.forEach((creator) => {
 				if (creator.length > 8) {
 					let nameWithoutAlias = creator[0].creatorName.value.split(',');
 					const creatorLink = nameWithoutAlias[0];
@@ -60,26 +60,26 @@ request(makeQueryURL(creatorQuery), function (error, response, data) {
 					const firstName = function () {
 						for (let i = 0; i < nameWithoutAlias.length; i++) {
 							let codeLine = nameWithoutAlias;
-							return codeLine.substr(0, codeLine.indexOf(" "));
+							return codeLine.substr(0, codeLine.indexOf(' '));
 						}
-					}
-
+					};
+					
 					creatorData[creatorLink] = {
 						firstName: `${firstName()}`,
 						birthYear: creator[0].birthYear.value,
 						nameWithoutAlias: nameWithoutAlias,
 						workImage: creator[0].werkImg.value
-					}
+					};
 				}
-			})
+			});
 		}
 	}
-})
+});
 
 function getCreatorInfo(id) {
 	const artData = result[Object.keys(result).find(key => key.includes(id))];
 
-	const nameWithoutAlias = artData[0].creatorName.value.split(',')
+	const nameWithoutAlias = artData[0].creatorName.value.split(',');
 
 	const creatorInfo = {
 		creatorName: nameWithoutAlias[0],
@@ -87,7 +87,7 @@ function getCreatorInfo(id) {
 		deathYear: artData[0].deathYear.value
 	};
 
-	return creatorInfo
+	return creatorInfo;
 }
 
 function filterByName(id){
@@ -105,30 +105,30 @@ function filterByName(id){
 		return Number(a.werkYear.value) - Number(b.werkYear.value);
 	});
 
-	sortedByYear.forEach((work, i) => {
+	sortedByYear.forEach((work) => {
 		if (work.werkTitle.value.length < 80) {
 			const werkTitleCleaned = work.werkTitle.value.split('(');
 			const obj = {
-				"workYear": work.werkYear.value,
-				"workTitle": werkTitleCleaned[0],
-				"workImage": work.werkImg.value
-			}
-			creatorWork.push(obj)
+				'workYear': work.werkYear.value,
+				'workTitle': werkTitleCleaned[0],
+				'workImage': work.werkImg.value
+			};
+			creatorWork.push(obj);
 		}
-	})
+	});
 
-	return creatorWork
+	return creatorWork;
 }
 
 app.get('/', function (req, res) {
-	res.render('index', { creators: creatorData })
-})
+	res.render('index', { creators: creatorData });
+});
 app.get('/:id', function (req, res) {
 	const filteredData = filterByName(req.params.id);
 	const infoOfCreator = getCreatorInfo(req.params.id);
-	res.render('person', { creatorWork: filteredData, creatorInfo: infoOfCreator })
-})
+	res.render('person', { creatorWork: filteredData, creatorInfo: infoOfCreator });
+});
 
 const server = app.listen(6969, function () {
-	console.log('server is running on port 6969')
-})
+	console.log('server is running on port 6969');
+});

@@ -7,13 +7,16 @@
 		"start": "nodemon server.js",
 		"build-js": "browserify src/scripts/bundle.js -o public/scripts/bundle.js -t [ babelify --presets [ env ] --plugins [ transform-object-rest-spread ] ]",
 		"build-css": "node-sass -w --output-style src/styles/*/*.scss public/styles/main.css",
+		"lint": "eslint src/scripts/*.js",
 		"dev": "parallelshell \"npm run start\" \"npm run build-js\" \"npm run build-css\"",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"author": "Mees Rutten",
 	"license": "MIT",
 	"dependencies": {
+		"babel-core": "^6.26.0",
 		"body-parser": "^1.17.1",
+		"common-js": "^0.3.8",
 		"ejs": "^2.5.7",
 		"express": "^4.15.2",
 		"http": "0.0.0",
@@ -24,9 +27,24 @@
 	},
 	"devDependencies": {
 		"babel-plugin-transform-object-rest-spread": "^6.26.0",
-		"browserify": "^14.1.0",
-		"babelify": "^8.0.0",
 		"babel-preset-env": "^1.6.1",
+		"babelify": "^8.0.0",
+		"babel-core": "^6.26.0",
+		"browserify": "^14.1.0",
+		"eslint": "^4.19.1",
+		"eslint-config-standard": "^11.0.0",
+		"eslint-plugin-import": "^2.9.0",
+		"eslint-plugin-node": "^6.0.1",
+		"eslint-plugin-promise": "^3.7.0",
+		"eslint-plugin-standard": "^3.0.1",
 		"node-sass": "^4.7.2"
+	},
+	"eslintConfig": {
+		"plugins": [
+			"example"
+		],
+		"env": {
+			"example/custom": true
+		}
 	}
 }
