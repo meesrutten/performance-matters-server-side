@@ -7,6 +7,10 @@ var _hoverPerspectiveAnimation = require('./hoverPerspectiveAnimation');
 
 var _hoverPerspectiveAnimation2 = _interopRequireDefault(_hoverPerspectiveAnimation);
 
+var _swHandler = require('./sw-handler');
+
+var _swHandler2 = _interopRequireDefault(_swHandler);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 if (!localStorage.getItem('visited')) {
@@ -38,7 +42,7 @@ if (document.querySelectorAll('#black_stripe')[0]) {
 // 	hoverPerspectiveAnimation();
 // }
 
-},{"./hoverPerspectiveAnimation":3,"./initialAnimation":4}],2:[function(require,module,exports){
+},{"./hoverPerspectiveAnimation":3,"./initialAnimation":4,"./sw-handler":5}],2:[function(require,module,exports){
 'use strict';
 
 var _app = require('./app');
@@ -148,5 +152,40 @@ exports.detailPageAnimation = detailPageAnimation;
 
 // 	// Disable entire IntersectionObserver
 // 	// io.disconnect();
+
+},{}],5:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+// https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorker
+var servicehandler = function () {
+	if ('serviceWorker' in navigator) {
+		navigator.serviceWorker.register('/sw.js', {
+			scope: './'
+		}).then(function (registration) {
+			var serviceWorker;
+			if (registration.installing) {
+				serviceWorker = registration.installing;
+			} else if (registration.waiting) {
+				serviceWorker = registration.waiting;
+			} else if (registration.active) {
+				serviceWorker = registration.active;
+			}
+			if (serviceWorker) {
+				// logState(serviceWorker.state);
+				serviceWorker.addEventListener('statechange', function (e) {
+					// logState(e.target.state);
+				});
+			}
+		}).catch(function (error) {
+			// Something went wrong during registration. The service-worker.js file
+			// might be unavailable or contain a syntax error.
+		});
+	}
+}();
+
+exports.default = servicehandler;
 
 },{}]},{},[2]);

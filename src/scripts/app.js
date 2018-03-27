@@ -1,5 +1,6 @@
 import {initialAnimation, detailPageAnimation} from './initialAnimation';
 import hoverPerspectiveAnimation from './hoverPerspectiveAnimation';
+import servicehandler from './sw-handler';
 
 if (!localStorage.getItem('visited')) {
 	initialAnimation();
