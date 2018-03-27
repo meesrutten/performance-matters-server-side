@@ -1,5 +1,6 @@
 <% var creatorWork = creatorWork;
 var creatorInfo = creatorInfo;
+var creatorWorkImages = creatorWorkImages;
  %>
 
 <div data-view="person">
@@ -33,7 +34,7 @@ var creatorInfo = creatorInfo;
 
 					<div class="creatorWork">
 						<h2 lang="nl"><%- creatorWork[i].workTitle %></h2>
-						<img class="timeline-image" src="<%- creatorWork[i].workImage %>" alt="Image of the artists work">
+						<img class="timeline-image" src="<%- creatorWorkImages[i].workImage %>" alt="Image of the artists work">
 					</div>
 			<% } %>
 

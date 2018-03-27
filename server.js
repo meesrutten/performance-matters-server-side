@@ -1,5 +1,7 @@
 const express = require('express');
 const request = require('request');
+const sharp = require('sharp');
+const fs = require('fs');
 const app = express();
 
 app.use(express.static('public'));
@@ -37,7 +39,9 @@ function makeQueryURL(query) {
 	return `https://api.data.adamlink.nl/datasets/AdamNet/all/services/hva2018/sparql?default-graph-uri=&query=${encodedquery}&format=application%2Fsparql-results%2Bjson&timeout=0&debug=on`;
 }
 
-const creatorData = {};
+let creatorData = {};
+let creatorImages = {};
+const creatorWorkImages = [];
 let result;
 
 request(makeQueryURL(creatorQuery), function (error, response, data) {
@@ -51,7 +55,7 @@ request(makeQueryURL(creatorQuery), function (error, response, data) {
 
 			const resultArray = Object.keys(result).map(key => result[key]);
 
-			resultArray.forEach((creator) => {
+			resultArray.forEach((creator, index) => {
 				if (creator.length > 8) {
 					let nameWithoutAlias = creator[0].creatorName.value.split(',');
 					const creatorLink = nameWithoutAlias[0];
@@ -67,7 +71,9 @@ request(makeQueryURL(creatorQuery), function (error, response, data) {
 					creatorData[creatorLink] = {
 						firstName: `${firstName()}`,
 						birthYear: creator[0].birthYear.value,
-						nameWithoutAlias: nameWithoutAlias,
+						nameWithoutAlias: nameWithoutAlias
+					};
+					creatorImages[creatorLink] = {
 						workImage: creator[0].werkImg.value
 					};
 				}
@@ -108,12 +114,15 @@ function filterByName(id){
 	sortedByYear.forEach((work) => {
 		if (work.werkTitle.value.length < 80) {
 			const werkTitleCleaned = work.werkTitle.value.split('(');
-			const obj = {
+			const yearAndTitle = {
 				'workYear': work.werkYear.value,
-				'workTitle': werkTitleCleaned[0],
+				'workTitle': werkTitleCleaned[0]
+			};
+			const image = {
 				'workImage': work.werkImg.value
 			};
-			creatorWork.push(obj);
+			creatorWorkImages.push(image);
+			creatorWork.push(yearAndTitle);
 		}
 	});
 
@@ -121,12 +130,13 @@ function filterByName(id){
 }
 
 app.get('/', function (req, res) {
-	res.render('index', { creators: creatorData });
+	res.render('index', { creators: creatorData, creatorImages });
 });
+
 app.get('/:id', function (req, res) {
 	const filteredData = filterByName(req.params.id);
 	const infoOfCreator = getCreatorInfo(req.params.id);
-	res.render('person', { creatorWork: filteredData, creatorInfo: infoOfCreator });
+	res.render('person', { creatorWork: filteredData, creatorInfo: infoOfCreator, creatorWorkImages });
 });
 
 const server = app.listen(6969, function () {
