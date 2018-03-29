@@ -32,7 +32,9 @@ This will start a Node server with bundled and compiled JS and SCSS to compresse
 ## Audit
 
 ### Performance
+
 ![Performance audit](./readme-images/performance.jpg "Performance audit")
+
 - ~90/100
 - Slow images are caused by API
 - Uses system fonts
@@ -42,13 +44,18 @@ I tried to get the images and resize/compress them before sending them to the cl
 To increase performance most I need to find a way to resize/compress the images.
 
 ### Progressive web app
+
 ![Progressive web app audit](./readme-images/pwa.jpg "Progressive web app audit")
+
 - ~73/100
 - App is installable
 - Install prompt will fire on further navigating
 - Has working Service Worker / manifest
 
 ### Accessibility and Best Practices
+
+![Accessibility and best practice audit](./readme-images/acc-bp.jpg "Accessibility and best practice audit")
+
 - 100/100 on both
 - Good color contrast
 - Keyboard accessible
