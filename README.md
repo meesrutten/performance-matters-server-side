@@ -33,7 +33,7 @@ This will start a Node server with bundled and compiled JS and SCSS to compresse
 
 ### Performance
 
-![Performance audit](./readme-images/performance.jpg "Performance audit")
+![Performance audit](/readme-images/performance.jpg "Performance audit")
 
 - ~90/100
 - Slow images are caused by API
@@ -45,7 +45,7 @@ To increase performance most I need to find a way to resize/compress the images.
 
 ### Progressive web app
 
-![Progressive web app audit](./readme-images/pwa.jpg "Progressive web app audit")
+![Progressive web app audit](/readme-images/pwa.jpg "Progressive web app audit")
 
 - ~73/100
 - App is installable
@@ -54,7 +54,7 @@ To increase performance most I need to find a way to resize/compress the images.
 
 ### Accessibility and Best Practices
 
-![Accessibility and best practice audit](./readme-images/acc-bp.jpg "Accessibility and best practice audit")
+![Accessibility and best practice audit](/readme-images/acc-bp.jpg "Accessibility and best practice audit")
 
 - 100/100 on both
 - Good color contrast
