@@ -1,4 +1,4 @@
-const STATIC_CACHE = 'static-cache-v1';
+const STATIC_CACHE = 'static-cache-v4';
 
 self.addEventListener('install', event => {
 	event.waitUntil(
@@ -11,6 +11,7 @@ self.addEventListener('install', event => {
 				'/styles/main.css',
 			]))
 			.then(self.skipWaiting())
+			.catch(e => { console.log(e); })
 	);
 });
 
@@ -20,33 +21,27 @@ self.addEventListener('fetch', event => {
 			fetch(event.request)
 				.then(response => toPageCache(event.request, response))
 				.catch(() => fromPageCache(event.request))
-				.catch(() => fromCoreCache('/offline'))
 		);
 	} else {
 		event.respondWith(
 			fetch(event.request)
 				.catch(() => fromPageCache(event.request))
-				.catch(() => fromCoreCache('/offline'))
 		);
 	}
 });
 
-function fromCoreCache(url) {
-	return caches.open(STATIC_CACHE)
-		.then(cache => cache.match(url))
-		.then(response => response ? response : Promise.reject());
-}
-
 function fromPageCache(request) {
 	return caches.open(STATIC_CACHE)
 		.then(cache => cache.match(request))
-		.then(response => response ? response : Promise.reject());
+		.then(response => response ? response : Promise.reject())
+		.catch(e => { console.log(e); });
 }
 
 function toPageCache(request, response) {
 	const clone = response.clone();
 	caches.open(STATIC_CACHE)
-		.then(cache => cache.put(request, clone));
+		.then(cache => cache.put(request, clone))
+		.catch(e => {console.log(e);});
 
 	return response;
 }

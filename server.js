@@ -1,7 +1,5 @@
 const express = require('express');
 const request = require('request');
-const sharp = require('sharp');
-const fs = require('fs');
 const app = express();
 
 app.use(express.static('public'));
@@ -55,12 +53,13 @@ request(makeQueryURL(creatorQuery), function (error, response, data) {
 
 			const resultArray = Object.keys(result).map(key => result[key]);
 
-			resultArray.forEach((creator, index) => {
+			resultArray.forEach((creator) => {
 				if (creator.length > 8) {
 					let nameWithoutAlias = creator[0].creatorName.value.split(',');
 					const creatorLink = nameWithoutAlias[0];
 					nameWithoutAlias = nameWithoutAlias[0].replace(/\s{2,}/g, ' ');
-
+					let httpImageUrl = creator[0].werkImg.value;
+					let httpsImageUrl = httpImageUrl.replace(/^http:\/\//i, 'https://');
 					const firstName = function () {
 						for (let i = 0; i < nameWithoutAlias.length; i++) {
 							let codeLine = nameWithoutAlias;
@@ -74,7 +73,7 @@ request(makeQueryURL(creatorQuery), function (error, response, data) {
 						nameWithoutAlias: nameWithoutAlias
 					};
 					creatorImages[creatorLink] = {
-						workImage: creator[0].werkImg.value
+						workImage: httpsImageUrl
 					};
 				}
 			});
@@ -114,12 +113,14 @@ function filterByName(id){
 	sortedByYear.forEach((work) => {
 		if (work.werkTitle.value.length < 80) {
 			const werkTitleCleaned = work.werkTitle.value.split('(');
+			let httpImageUrl = work.werkImg.value;
+			let httpsImageUrl = httpImageUrl.replace(/^http:\/\//i, 'https://');
 			const yearAndTitle = {
 				'workYear': work.werkYear.value,
 				'workTitle': werkTitleCleaned[0]
 			};
 			const image = {
-				'workImage': work.werkImg.value
+				'workImage': httpsImageUrl
 			};
 			creatorWorkImages.push(image);
 			creatorWork.push(yearAndTitle);

@@ -61,14 +61,15 @@ function hoverPerspectiveAnimation() {
 	var mouseOutTween = void 0; // set on mouse-out
 
 	TweenMax.set([button, label], { transformPerspective: 700 });
+
 	button.forEach(function (el) {
 		el.addEventListener('click', function (e) {
 			var rect = el.getBoundingClientRect(),
 			    x = e.clientX - rect.left,
 			    y = e.clientY - rect.top,
-			    hit = { x: x, y: y, radius: 1, alpha: 1 };
+			    hit = { x: x, y: y, radius: 1, autoAlpha: 1 };
 
-			TweenMax.to(hit, 0.5, { radius: 200, alpha: 0, ease: Power1.easeOut });
+			TweenMax.to(hit, 0.5, { radius: 200, autoAlpha: 0, ease: Power1.easeOut });
 		});
 
 		el.addEventListener('mousemove', function (e) {
@@ -108,7 +109,7 @@ function initialAnimation() {
 	timeline.staggerTo(chars, 0.8, { autoAlpha: 1 }, .1);
 
 	timeline.to('.vertical-timeline', 1, { autoAlpha: 1 }, 3);
-	TweenMax.staggerTo('.creatorWork', 2, { opacity: 1, delay: 1 }, 0.25);
+	TweenMax.staggerTo('.creatorWork', 2, { autoAlpha: 1, delay: 3 }, 0.5);
 
 	timeline.play();
 }

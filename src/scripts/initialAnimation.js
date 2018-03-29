@@ -9,7 +9,7 @@ function initialAnimation() {
 	timeline.staggerTo(chars, 0.8, { autoAlpha: 1 }, .1);
 
 	timeline.to('.vertical-timeline', 1, { autoAlpha: 1 }, 3);
-	TweenMax.staggerTo('.creatorWork', 2, { opacity: 1, delay: 1 }, 0.25);
+	TweenMax.staggerTo('.creatorWork', 2, { autoAlpha: 1, delay: 3 }, 0.5);
 	
 	timeline.play();
 }

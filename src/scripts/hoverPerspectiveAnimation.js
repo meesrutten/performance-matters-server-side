@@ -5,14 +5,15 @@ function hoverPerspectiveAnimation() {
 	let mouseOutTween;// set on mouse-out
 
 	TweenMax.set([button, label], { transformPerspective: 700 });
+
 	button.forEach((el) => {
 		el.addEventListener('click', function (e) {
 			let rect = el.getBoundingClientRect(),
 				x = e.clientX - rect.left,
 				y = e.clientY - rect.top,
-				hit = { x: x, y: y, radius: 1, alpha: 1 };
+				hit = { x: x, y: y, radius: 1, autoAlpha: 1 };
 
-			TweenMax.to(hit, 0.5, { radius: 200, alpha: 0, ease: Power1.easeOut });
+			TweenMax.to(hit, 0.5, { radius: 200, autoAlpha: 0, ease: Power1.easeOut });
 
 		});
 
