@@ -89,3 +89,7 @@ To increase performance most I need to find a way to resize/compress the images.
 In the future I want to: 
 - Compress the images
 - Add lazy loading
+
+# Conclusion
+By changing clientside rendering to serverside rendering, adding system fonts, gzip, css compression and critical CSS...
+You can influence performance by minimaly half a second.
