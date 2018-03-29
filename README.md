@@ -31,6 +31,11 @@ This will start a Node server with bundled and compiled JS and SCSS to compresse
 
 ## Audit
 
+### Before
+
+![Before, Performance audit](./readme-images/before.png "Before, Performance audit")
+No serverside rendering
+
 ### Performance
 
 ![Performance audit](./readme-images/performance.png "Performance audit")
