@@ -6,7 +6,7 @@
 	"scripts": {
 		"start": "nodemon server.js",
 		"build-js": "browserify src/scripts/bundle.js -o public/scripts/bundle.js -t [ babelify --presets [ env ] --plugins [ transform-object-rest-spread ] ]",
-		"build-css": "node-sass -w --output-style src/styles/*/*.scss public/styles/main.css",
+		"build-css": "node-sass src/styles/main.scss public/styles/main.css",
 		"lint": "eslint src/scripts/*.js",
 		"dev": "parallelshell \"npm run start\" \"npm run build-js\" \"npm run build-css\"",
 		"test": "echo \"Error: no test specified\" && exit 1"

@@ -9,6 +9,8 @@ It portrays the name, birthyear and deathyear of the artists.
 
 When navigating to an artist you can see his work in a chronological timeline.
 
+![Timeline of artists](./readme-images/timeline-artist-Mees-Rutten.gif "Timeline of artists")
+
 ## Build
 For this build I used:
 - ES6 modules
@@ -21,7 +23,7 @@ For this build I used:
  Server: express
  Data from Adamnet
 
-## NPM scripts
+## npm scripts
 
 ### Run all
 This will start a Node server with bundled and compiled JS and SCSS to compressed CSS.
@@ -45,6 +47,7 @@ No serverside rendering
 - Uses system fonts
 
 #### To increase performance further
+By using `fs.writeFile` I tried to download all the images, then compress and resize them with `sharp` and then write those to a folder for the client.
 I tried to get the images and resize/compress them before sending them to the client but I failed.
 To increase performance most I need to find a way to resize/compress the images.
 
