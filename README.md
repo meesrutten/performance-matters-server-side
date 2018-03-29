@@ -2,6 +2,13 @@
 ## Performance matters
 ### Serverside application
 
+## Concept
+This is a website that displays a timeline of artists in Amsterdam during the Golden Age.
+
+It portrays the name, birthyear and deathyear of the artists.
+
+When navigating to an artist you can see his work in a chronological timeline.
+
 ## Build
 For this build I used:
 - ES6 modules
@@ -22,30 +29,33 @@ This will start a Node server with bundled and compiled JS and SCSS to compresse
 "dev": "parallelshell \"npm run start\" \"npm run build-js\" \"npm run build-css\""
 ```
 
-### Start server:
-```javascript
-"start": "nodemon server.js"
-```
+## Audit
 
-### Compile and bundle
-Uses Browserify and takes `bundle.js`, adds all other JS files to `bundle.js` and compiles it.
-```javascript
-"build-js": "browserify src/scripts/bundle.js -o public/scripts/bundle.js -t [ babelify --presets [ env ] --plugins [ transform-object-rest-spread ] ]"
-```
+### Performance
+![Performance audit](./readme-images/performance.jpg "Performance audit")
+- ~90/100
+- Slow images are caused by API
+- Uses system fonts
 
-### Build CSS
-Takes the SCSS and compiles it to CSS.
-```javascript
-"build-css": "node-sass -w --output-style src/styles/*/*.scss public/styles/main.css"
-```
+#### To increase performance further
+I tried to get the images and resize/compress them before sending them to the client but I failed.
+To increase performance most I need to find a way to resize/compress the images.
 
-### ESLint
-Config is included in the project.
-```javascript
-"lint": "eslint src/scripts/*.js"
-```	
+### Progressive web app
+![Progressive web app audit](./readme-images/pwa.jpg "Progressive web app audit")
+- ~73/100
+- App is installable
+- Install prompt will fire on further navigating
+- Has working Service Worker / manifest
 
-### Audit
-![A Lighthouse audit](https://github.com/meesrutten/performance-matters-server-side/blob/master/readme-images/audit.png "Audit")
-- Images are very slow because of the endpoint.
-- 89/100 in Performance
+### Accessibility and Best Practices
+- 100/100 on both
+- Good color contrast
+- Keyboard accessible
+- Aria labeled when needed
+
+## Future
+In the future I want to: 
+- Compress the images
+- Add critical CSS
+- Add lazy loading

@@ -1,10 +1,17 @@
 const express = require('express');
+const gzip = require('compression');
 const request = require('request');
 const app = express();
 
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
 app.set('views', 'views');
+
+// gzip
+app.use(gzip({
+	threshold: 0,
+	filter: () => true, // Compress all assets by default
+}));
 
 const creatorQuery = `
 PREFIX dc: <http://purl.org/dc/elements/1.1/>
